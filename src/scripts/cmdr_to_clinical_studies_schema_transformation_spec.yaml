@@ -1,0 +1,362 @@
+id: cmdr_to_clinical_studies_schema
+title: CMDR to clincal studies schema transformation
+class_derivations:
+  Entity:
+    name: Entity
+    overrides:
+      abstract: true
+      description: Any resource that has its own identifier
+      class_uri: schema:Thing
+    populated_from: Entity
+    slot_derivations:
+      id:
+        name: id
+        populated_from: internalId
+      globalIds:
+        name: globalIds
+        populated_from: globalIds
+      name:
+        name: name
+        populated_from: name
+      description:
+        name: description
+        populated_from: description
+  Subject:
+    name: Subject
+    populated_from: Subject
+    slot_derivations:
+      id:
+        name: id
+        populated_from: id
+      species:
+        name: species
+        populated_from: species
+      sex:
+        name: sex
+        populated_from: sex
+      ethnicity:
+        name: ethnicity
+        populated_from: ethnicity
+      race:
+        name: race
+        populated_from: race
+      vital_status:
+        name: vital_status
+        populated_from: vital_status
+      yearOfBirth:
+        name: yearOfBirth
+        populated_from: yearOfBirth
+      yearOfDeath:
+        name: yearOfDeath
+        populated_from: yearOfDeath
+      ageAtDeath:
+        name: ageAtDeath
+        populated_from: ageAtDeath
+      causeOfDeath:
+        name: causeOfDeath
+        populated_from: causeOfDeath
+      associatedParticipants:
+        name: associatedParticipants
+        populated_from: associatedParticipants
+  StudyParticipant:
+    name: StudyParticipant
+    populated_from: StudyParticipant
+    slot_derivations:
+      id:
+        name: id
+        populated_from: id
+      study:
+        name: study
+        populated_from: study
+      enrollment:
+        name: enrollment
+        populated_from: enrollment
+      entSite:
+        name: entSite
+        populated_from: entSite
+      demographics:
+        name: demographics
+        populated_from: demographics
+      observations:
+        name: observations
+        populated_from: observations
+      conditions:
+        name: conditions
+        populated_from: conditions
+      relationships:
+        name: relationships
+        populated_from: relationships
+  Relationship:
+    name: Relationship
+    populated_from: Relationship
+    slot_derivations:
+      id:
+        name: id
+        populated_from: id
+      participant:
+        name: participant
+        populated_from: participant
+      relative:
+        name: relative
+        populated_from: relative
+      relationshipType:
+        name: relationshipType
+        populated_from: relationshipType
+  Family:
+    name: Family
+    populated_from: Family
+    slot_derivations:
+      id:
+        name: id
+        populated_from: id
+      study:
+        name: study
+        populated_from: study
+      family_type:
+        name: family_type
+        populated_from: family_type
+      members:
+        name: members
+        populated_from: members
+      relationships:
+        name: relationships
+        populated_from: relationships
+      probands:
+        name: probands
+        populated_from: probands
+  Group:
+    name: Group
+    populated_from: Group
+    slot_derivations:
+      id:
+        name: id
+        populated_from: id
+      memberType:
+        name: memberType
+        populated_from: memberType
+      members:
+        name: members
+        populated_from: members
+      memberCount:
+        name: memberCount
+        populated_from: memberCount
+      criteria:
+        name: criteria
+        populated_from: criteria
+      hasSubset:
+        name: hasSubset
+        populated_from: hasSubset
+      characteristics:
+        name: characteristics
+        populated_from: characteristics
+      subsetOf:
+        name: subsetOf
+        populated_from: subsetOf
+  Characteristic:
+    name: Characteristic
+    populated_from: Characteristic
+    slot_derivations:
+      name:
+        name: name
+        populated_from: name
+      values:
+        name: values
+        populated_from: values
+      valueOperator:
+        name: valueOperator
+        populated_from: valueOperator
+      exclude:
+        name: exclude
+        populated_from: exclude
+  Study:
+    name: Study
+    populated_from: Study
+    slot_derivations:
+      id:
+        name: id
+        populated_from: id
+      name:
+        name: name
+        populated_from: name
+      design:
+        name: design
+        populated_from: design
+      researchFocus:
+        name: researchFocus
+        populated_from: researchFocus
+      selectionCriteriaDescription:
+        name: selectionCriteriaDescription
+        populated_from: selectionCriteriaDescription
+      period:
+        name: period
+        populated_from: period
+      studyGroup:
+        name: studyGroup
+        populated_from: studyGroup
+      contributions:
+        name: contributions
+        populated_from: contributions
+      contacts:
+        name: contacts
+        populated_from: contacts
+  StudyContribution:
+    name: StudyContribution
+    populated_from: StudyContribution
+    slot_derivations:
+      agent:
+        name: agent
+        populated_from: agent
+      contributorRole:
+        name: contributorRole
+        populated_from: contributorRole
+      period:
+        name: period
+        populated_from: period
+      organizationalContext:
+        name: organizationalContext
+        populated_from: organizationalContext
+      status:
+        name: status
+        populated_from: status
+      preferredContact:
+        name: preferredContact
+        populated_from: preferredContact
+  StudyContact:
+    name: StudyContact
+    populated_from: StudyContact
+    slot_derivations:
+      agent:
+        name: agent
+        populated_from: agent
+      contactPoints:
+        name: contactPoints
+        populated_from: contactPoints
+      purpose:
+        name: purpose
+        populated_from: purpose
+      period:
+        name: period
+        populated_from: period
+      organizationalContext:
+        name: organizationalContext
+        populated_from: organizationalContext
+  Agent:
+    name: Agent
+    populated_from: Agent
+    slot_derivations:
+      id:
+        name: id
+        populated_from: id
+      name:
+        name: name
+        populated_from: name
+      urls:
+        name: urls
+        populated_from: urls
+  Person:
+    name: Person
+    populated_from: Person
+    slot_derivations:
+      name:
+        name: name
+        populated_from: name
+      contactPoints:
+        name: contactPoints
+        populated_from: contactPoints
+      affiliations:
+        name: affiliations
+        populated_from: affiliations
+  Organization:
+    name: Organization
+    populated_from: Organization
+    slot_derivations:
+      name:
+        name: name
+        populated_from: name
+      contactPoints:
+        name: contactPoints
+        populated_from: contactPoints
+      parentOrganizations:
+        name: parentOrganizations
+        populated_from: parentOrganizations
+      childOrganizations:
+        name: childOrganizations
+        populated_from: childOrganizations
+  Software:
+    name: Software
+    populated_from: Software
+    slot_derivations:
+      version:
+        name: version
+        populated_from: version
+  TimePeriod:
+    name: TimePeriod
+    populated_from: TimePeriod
+    slot_derivations:
+      start:
+        name: start
+        populated_from: start
+      end:
+        name: end
+        populated_from: end
+  TimePoint:
+    name: TimePoint
+    populated_from: TimePoint
+    slot_derivations:
+      dateTime:
+        name: dateTime
+        populated_from: dateTime
+      index_time_point:
+        name: index_time_point
+        populated_from: index_time_point
+      offset_from_index:
+        name: offset_from_index
+        populated_from: offset_from_index
+      event_type:
+        name: event_type
+        populated_from: event_type
+  ContactPoint:
+    name: ContactPoint
+    populated_from: ContactPoint
+    slot_derivations:
+      system:
+        name: system
+        populated_from: system
+      value:
+        name: value
+        populated_from: value
+      validDates:
+        name: validDates
+        populated_from: validDates
+  Affiliation:
+    name: Affiliation
+    populated_from: Affiliation
+    slot_derivations:
+      member:
+        name: member
+        populated_from: member
+      organization:
+        name: organization
+        populated_from: organization
+      memberRole:
+        name: memberRole
+        populated_from: memberRole
+      started:
+        name: started
+        populated_from: started
+      ended:
+        name: ended
+        populated_from: ended
+      status:
+        name: status
+        populated_from: status
+  Quantity:
+    name: Quantity
+    populated_from: Quantity
+    slot_derivations:
+      value:
+        name: value
+        populated_from: value
+      unit:
+        name: unit
+        populated_from: unit
