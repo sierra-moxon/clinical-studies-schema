@@ -10,6 +10,8 @@ include = ["README.md", "src/clinical_studies_schema/schema", "project"]
 [tool.poetry.dependencies]
 python = "^3.9"
 linkml-runtime = "^1.1.24"
+linkml-map = "^0.3.8"
+linkml = "^1.8.5"
 
 [tool.poetry-dynamic-versioning]
 enable = true
