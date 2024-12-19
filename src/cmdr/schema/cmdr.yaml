@@ -1,0 +1,408 @@
+id: https://w3id.org/linkml/cmdr
+name: cmdr
+title: cmdr
+description: |-
+  Core Model for Clinical Data Collection
+license: MIT
+see_also:
+  - https://linkml.github.io/cmdr
+
+prefixes:
+  cmdr: https://w3id.org/linkml/cmdr/
+  linkml: https://w3id.org/linkml/
+  biolink: https://w3id.org/biolink/
+  schema: http://schema.org/
+  PATO: http://purl.obolibrary.org/obo/PATO_
+  example: https://example.org/
+  OBI: http://purl.obolibrary.org/obo/OBI_
+default_prefix: cmdr
+default_range: string
+
+imports:
+  - linkml:types
+
+classes:
+  Entity:
+    slots:
+      - internalId
+      - globalIds
+      - name
+      - description
+
+  Subject:
+    slots:
+      - id
+      - species
+      - sex
+      - ethnicity
+      - race
+      - vital_status
+      - yearOfBirth
+      - yearOfDeath
+      - ageAtDeath
+      - causeOfDeath
+      - associatedParticipants
+
+  StudyParticipant:
+    slots:
+      - id
+      - study
+      - enrollment
+      - entSite
+      - demographics
+      - observations
+      - conditions
+      - relationships
+    slot_usage:
+      associatedParticipants:
+        range: Subject
+      relationships:
+        range: Relationship
+
+  Relationship:
+    slots:
+      - id
+      - participant
+      - relative
+      - relationshipType
+    slot_usage:
+      participant:
+        range: StudyParticipant
+      relative:
+        range: StudyParticipant
+
+  Family:
+    slots:
+      - id
+      - study
+      - family_type
+      - members
+      - relationships
+      - probands
+    slot_usage:
+      members:
+        range: StudyParticipant
+      relationships:
+        range: Relationship
+      probands:
+        range: StudyParticipant
+
+  Group:
+    slots:
+      - id
+      - memberType
+      - members
+      - memberCount
+      - criteria
+      - hasSubset
+      - characteristics
+      - subsetOf
+    slot_usage:
+      members:
+        range: StudyParticipant
+      hasSubset:
+        range: Group
+      subsetOf:
+        range: Group
+
+  Characteristic:
+    slots:
+      - name
+      - values
+      - valueOperator
+      - exclude
+
+  Study:
+    slots:
+      - id
+      - name
+      - design
+      - researchFocus
+      - selectionCriteriaDescription
+      - period
+      - studyGroup
+      - contributions
+      - contacts
+    slot_usage:
+      studyGroup:
+        range: Group
+      contributions:
+        range: StudyContribution
+      contacts:
+        range: StudyContact
+
+  StudyContribution:
+    attributes:
+      - agent
+      - contributorRole
+      - period
+      - organizationalContext
+      - status
+      - preferredContact
+    slot_usage:
+      agent:
+        range: Agent
+      organizationalContext:
+        range: Organization
+      preferredContact:
+        range: StudyContact
+
+  StudyContact:
+    attributes:
+      - agent
+      - contactPoints
+      - purpose
+      - period
+      - organizationalContext
+    slot_usage:
+      agent:
+        range: Agent
+      organizationalContext:
+        range: Organization
+
+  Agent:
+    slots:
+      - id
+      - name
+      - urls
+
+  Person:
+    slots:
+      - name
+      - contactPoints
+      - affiliations
+    slot_usage:
+      affiliations:
+        range: Affiliation
+
+  Organization:
+    slots:
+      - name
+      - contactPoints
+      - parentOrganizations
+      - childOrganizations
+    slot_usage:
+      parentOrganizations:
+        range: Organization
+      childOrganizations:
+        range: Organization
+
+  Software:
+    slots:
+      - version
+
+  TimePeriod:
+    slots:
+      - start
+      - end
+
+  TimePoint:
+    slots:
+      - dateTime
+      - index_time_point
+      - offset_from_index
+      - event_type
+
+  ContactPoint:
+    slots:
+      - system
+      - value
+      - validDates
+
+  Affiliation:
+    slots:
+      - member
+      - organization
+      - memberRole
+      - started
+      - ended
+      - status
+    slot_usage:
+      member:
+        range: Agent
+      organization:
+        range: Organization
+
+  Quantity:
+    slots:
+      - value
+      - unit
+
+slots:
+  internalId:
+    range: string
+  globalIds:
+    range: string
+  name:
+    range: string
+  description:
+    range: string
+  id:
+    range: string
+  exclude:
+    range: boolean
+  species:
+    range: string
+  sex:
+    range: string
+  ethnicity:
+    range: string
+  race:
+    range: string
+  vital_status:
+    range: string
+  yearOfBirth:
+    range: string
+  yearOfDeath:
+    range: string
+  ageAtDeath:
+    range: string
+  causeOfDeath:
+    range: string
+  associatedParticipants:
+    range: Subject
+  study:
+    range: Study
+  enrollment:
+    range: string
+  entSite:
+    range: Organization
+  demographics:
+    range: string
+  observations:
+    range: string
+  conditions:
+    range: string
+  relationships:
+    range: Relationship
+  participant:
+    range: StudyParticipant
+  relative:
+    range: StudyParticipant
+  relationshipType:
+    range: string
+  family_type:
+    range: string
+  members:
+    range: StudyParticipant
+  probands:
+    range: StudyParticipant
+  memberType:
+    range: string
+  memberCount:
+    range: integer
+  criteria:
+    range: string
+  hasSubset:
+    range: Group
+  characteristics:
+    range: Characteristic
+  subsetOf:
+    range: Group
+  contributorRole:
+    range: string
+  period:
+    range: string
+  organizationalContext:
+    range: Organization
+  status:
+    range: string
+  preferredContact:
+    range: StudyContact
+  contactPoints:
+    range: string
+  purpose:
+    range: string
+  urls:
+    range: string
+  affiliations:
+    range: Affiliation
+  parentOrganizations:
+    range: Organization
+  childOrganizations:
+    range: Organization
+  version:
+    range: string
+  start:
+    range: TimePoint
+  end:
+    range: TimePoint
+  dateTime:
+    range: string
+  index_time_point:
+    range: TimePoint
+  offset_from_index:
+    range: Quantity
+  event_type:
+    range: string
+  system:
+    range: string
+  validDates:
+    range: TimePeriod
+  member:
+    range: Agent
+  organization:
+    range: Organization
+  memberRole:
+    range: string
+  started:
+    range: string
+  ended:
+    range: string
+  value:
+    range: string
+  values:
+    range: string
+    multivalued: true
+  valueOperator:
+    range: string
+  unit:
+    range: string
+  design:
+    range: string  # need StudyDesignEnum
+  researchFocus:
+    range: string  # need ResearchFocusEnum
+  selectionCriteriaDescription:
+    range: string  # need SelectionCriteriaEnum
+  studyGroup:
+    range: string  # need StudyGroupEnum
+  contributions:
+    range: StudyContributorEnum
+  contacts:
+    range: StudyContact
+
+enums:
+  StudyContributorEnum:
+    permissible_values:
+      - Funder
+      - Sponsor
+      - Principal Investigator
+      - DCC
+      - Research Site
+  ContributionStatusEnum:
+    permissible_values:
+      - Paused
+      - Ongoing
+      - Completed
+      - Terminated
+  ContactSystemEnum:
+    permissible_values:
+      - Fax
+      - Email
+      - Telephone
+      - Pager
+      - URL
+      - Mailing Address
+      - Slack handle
+  AffiliationStatusEnum:
+    permissible_values:
+      - Active
+      - Inactive
+      - Pending
+  OrganizationalRoleEnum:
+    permissible_values:
+      - Lab Manager
+      - Graduate Student
+      - Post Doctoral Fellow
+      - Faculty
+      - Program Directory
